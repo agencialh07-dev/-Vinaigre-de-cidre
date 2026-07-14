@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dernière recommandation — Le rituel du vinaigre de cidre</title>
+<title>Offre exclusive — Le rituel du vinaigre de cidre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
   html{scroll-behavior:smooth;}
   body{
     background:
-      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(47,158,111,0.16), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(47,158,111,0.18), transparent 60%),
       var(--cidre-dark);
     color:var(--cream);
     font-family:'Work Sans', sans-serif;
@@ -44,7 +44,7 @@
     min-height:100vh;
     display:flex;
     justify-content:center;
-    padding: 0 16px 80px;
+    padding: 32px 16px 80px;
     transition: background 0.25s ease, color 0.25s ease;
   }
 
@@ -66,22 +66,47 @@
   .theme-toggle .icon-moon{ display:block; }
   :root[data-theme="light"] .theme-toggle .icon-sun{ display:block; }
   :root[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
-  .page{ width:100%; max-width:560px; }
+  .page{
+    width:100%;
+    max-width:560px;
+  }
 
-  /* Top banner — informative, not alarming */
-  .top-banner{
-    margin: 0 -16px 26px;
-    padding: 12px 16px;
-    background: var(--cidre-dark-2);
-    border-bottom: 1px solid var(--line);
+  /* Eyebrow / progress */
+  .progress-wrap{
+    margin-bottom: 28px;
+  }
+  .eyebrow{
     text-align:center;
     font-size:13px;
-    color:var(--cream-dim);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--amber-light);
+    font-weight:600;
+    margin-bottom:10px;
   }
-  .top-banner strong{ color:var(--amber-light); }
+  .progress-track{
+    height:6px;
+    border-radius:999px;
+    background:rgba(244,236,221,0.1);
+    overflow:hidden;
+    position:relative;
+  }
+  .progress-fill{
+    height:100%;
+    width:75%;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--sediment), var(--amber));
+  }
+  .progress-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--cream-dim);
+    margin-top:6px;
+  }
 
   /* Hero */
-  .hero{ text-align:center; margin-bottom:26px; padding-top: 8px;}
+  .hero{ text-align:center; margin-bottom:28px; }
   .kicker{
     color:var(--sage);
     font-size:13px;
@@ -92,88 +117,69 @@
   h1{
     font-family:'Fraunces', serif;
     font-weight:600;
-    font-size: clamp(26px, 6vw, 34px);
-    line-height:1.18;
+    font-size: clamp(28px, 6vw, 38px);
+    line-height:1.15;
     color:var(--cream);
     margin-bottom:14px;
   }
-  h1 em{ font-style:italic; color:var(--amber-light); }
+  h1 em{
+    font-style:italic;
+    color:var(--amber-light);
+  }
   .sub{
     color:var(--cream-dim);
-    font-size:15.5px;
-    line-height:1.55;
+    font-size:16px;
+    line-height:1.5;
     max-width:440px;
     margin:0 auto;
+  }
+  .trust-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:18px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--amber-light);
   }
 
   /* Video */
   .video-frame{
-    margin: 26px auto;
+    margin: 28px auto;
     width:100%;
     max-width:400px;
   }
 
-  /* Recap stack — different structure than upsell 1's bullet list */
-  .stack{
-    margin: 30px 0 8px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-  }
-  .stack-title{
-    padding: 16px 18px;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-    color:var(--cream-dim);
-    background:var(--cidre-dark-2);
-    border-bottom:1px solid var(--line);
-  }
-  .stack-item{
+  /* Benefits */
+  .benefits{
+    list-style:none;
+    margin: 30px 0;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
+    flex-direction:column;
+    gap:14px;
+  }
+  .benefits li{
+    display:flex;
     gap:12px;
-    padding: 14px 18px;
+    align-items:flex-start;
+    font-size:15px;
+    line-height:1.5;
+    color:var(--cream-dim);
+    padding-bottom:14px;
     border-bottom:1px solid var(--line);
-    font-size:14.5px;
   }
-  .stack-item:last-child{ border-bottom:none; }
-  .stack-item .name{ color:var(--cream); }
-  .stack-item .name span{
-    display:block;
-    font-size:12.5px;
-    color:var(--cream-dim);
-    margin-top:2px;
-    font-weight:400;
-  }
-  .stack-item .val{
+  .benefits li:last-child{ border-bottom:none; padding-bottom:0; }
+  .leaf{
     flex:none;
-    font-weight:600;
-    color:var(--amber-light);
-    white-space:nowrap;
+    width:22px; height:22px;
+    margin-top:2px;
   }
-  .stack-item .val.included{ color:var(--sage); }
-  .stack-total{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding: 16px 18px;
-    background:var(--cidre-dark-2);
-    font-size:14px;
-    color:var(--cream-dim);
-  }
-  .stack-total .val{
-    font-family:'Fraunces', serif;
-    font-size:22px;
-    color:var(--cream);
-    font-weight:600;
-  }
+  .benefits b{ color:var(--cream); font-weight:600; }
 
   /* Offer card */
   .offer-card{
-    margin: 22px 0 20px;
+    margin: 32px 0 20px;
     padding: 22px 20px;
     border-radius:16px;
     background: linear-gradient(180deg, rgba(47,158,111,0.10), rgba(47,158,111,0.02));
@@ -216,6 +222,7 @@
     color:var(--cream-dim);
     margin-bottom:20px;
   }
+
   .cta-btn{
     display:block;
     width:100%;
@@ -277,52 +284,52 @@
 
 <div class="page">
 
-  <div class="top-banner">Étape confirmée — <strong>une recommandation complémentaire</strong> avant de finaliser</div>
+  <div class="progress-wrap">
+    <div class="eyebrow">Il ne reste qu'une étape</div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-labels"><span>Commande confirmée</span><span>Offre complémentaire</span></div>
+  </div>
 
   <div class="hero">
-    <div class="kicker">🍎 On vous en dit plus</div>
-    <h1>Pour aller plus loin avec <em>le rituel du vinaigre de cidre</em></h1>
-    <p class="sub">Voici ce que d'autres personnes ajoutent souvent à leur commande, en complément du guide principal.</p>
+    <div class="kicker">🍎 Recommandé pour compléter votre programme</div>
+    <h1>Avant de continuer, découvrez <em>le rituel du vinaigre de cidre</em></h1>
+    <p class="sub">Une astuce simple à intégrer à votre routine du soir, expliquée en vidéo en moins de 3 minutes.</p>
+    <div class="trust-row">
+      <span>✓ Contenu vérifié</span>
+      <span>✓ 100% naturel</span>
+      <span>✓ 3 min chrono</span>
+    </div>
   </div>
 
   <div class="video-frame">
-    <vturb-smartplayer id="vid-6a557e7b88cf0eea5a811d47" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 133.33333333333331% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+    <vturb-smartplayer id="vid-6a557eb118c70e871b24021d" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 133.33333333333331% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
   </div>
 
-  <div class="stack">
-    <div class="stack-title">Ce qui est inclus dans cette offre</div>
-    <div class="stack-item">
-      <div class="name">Guide principal<span>Déjà dans votre commande</span></div>
-      <div class="val included">✓ Inclus</div>
-    </div>
-    <div class="stack-item">
-      <div class="name">Fiche récapitulative imprimable<span>Le rituel résumé sur une page</span></div>
-      <div class="val">12€</div>
-    </div>
-    <div class="stack-item">
-      <div class="name">Suivi hebdomadaire (PDF)<span>Pour noter vos habitudes semaine après semaine</span></div>
-      <div class="val">15€</div>
-    </div>
-    <div class="stack-item">
-      <div class="name">Accès aux mises à jour du guide<span>Pendant 12 mois</span></div>
-      <div class="val">9€</div>
-    </div>
-    <div class="stack-total">
-      <span>Valeur totale des bonus</span>
-      <span class="val">36€</span>
-    </div>
-  </div>
+  <ul class="benefits">
+    <li>
+      <svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M4 20C4 12 9 5 20 4c1 11-6 16-14 16-1 0-2-.4-2-.4" stroke="#4fb3a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><b>Un geste simple, deux minutes par soir.</b> Aucun matériel spécifique, aucune préparation compliquée.</span>
+    </li>
+    <li>
+      <svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M4 20C4 12 9 5 20 4c1 11-6 16-14 16-1 0-2-.4-2-.4" stroke="#4fb3a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><b>Pensé pour s'intégrer à votre programme actuel.</b> Un complément à ce que vous avez déjà commandé, pas un nouveau point de départ.</span>
+    </li>
+    <li>
+      <svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M4 20C4 12 9 5 20 4c1 11-6 16-14 16-1 0-2-.4-2-.4" stroke="#4fb3a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><b>Guide vidéo + fiche récapitulative.</b> Vous gardez tout, à consulter quand vous voulez.</span>
+    </li>
+  </ul>
 
   <div class="offer-card">
-    <span class="offer-tag">Ajouté à votre commande</span>
+    <span class="offer-tag">Réservé aux clients du jour</span>
     <div class="price-row">
-      <span class="price-old">36€</span>
-      <span class="price-new">14€</span>
+      <span class="price-old">37€</span>
+      <span class="price-new">17€</span>
     </div>
-    <p class="price-note">Paiement unique · accès immédiat avec votre guide</p>
+    <p class="price-note">Paiement unique · ajouté directement à votre commande</p>
   </div>
 
-  <a class="decline" href="../up3/up3.html">Non merci, je continue avec le guide seul</a>
+  <a class="decline" href="../up2/up2.html">Non merci, je continue sans cette offre</a>
 
   <p class="footer-note">Cette offre complète votre commande initiale et n'affecte pas son traitement, que vous l'acceptiez ou non.</p>
 
@@ -354,7 +361,7 @@
 
 <script type="text/javascript">
   var s = document.createElement("script");
-  s.src = "https://scripts.converteai.net/644a238a-e6b2-4852-b3d6-18b0fd037cc7/players/6a557e7b88cf0eea5a811d47/v4/player.js";
+  s.src = "https://scripts.converteai.net/644a238a-e6b2-4852-b3d6-18b0fd037cc7/players/6a557eb118c70e871b24021d/v4/player.js";
   s.async = !0;
   document.head.appendChild(s);
 </script>
