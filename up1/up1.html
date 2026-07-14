@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offre exclusive — Le rituel du vinaigre de cidre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cidre-dark: #0e1a17;
+    --cidre-dark-2: #13241f;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --cream: #eef5f1;
+    --cream-dim: #a9c2b8;
+    --sage: #4fb3a8;
+    --sediment: #1f7a54;
+    --line: rgba(238,245,241,0.10);
+  }
+
+  :root[data-theme="light"]{
+    --cidre-dark: #f6faf8;
+    --cidre-dark-2: #ffffff;
+    --amber: #2f9e6f;
+    --amber-light: #1f7a54;
+    --cream: #16241f;
+    --cream-dim: #5c7169;
+    --sage: #2f8c7f;
+    --sediment: #1f7a54;
+    --line: rgba(22,36,31,0.10);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(47,158,111,0.18), transparent 60%),
+      var(--cidre-dark);
+    color:var(--cream);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding: 32px 16px 80px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .theme-toggle{
+    position:fixed;
+    top:16px; right:16px;
+    z-index:100;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--cidre-dark-2);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-1px); }
+  .theme-toggle svg{ width:18px; height:18px; color:var(--cream); }
+  .theme-toggle .icon-sun{ display:none; }
+  .theme-toggle .icon-moon{ display:block; }
+  :root[data-theme="light"] .theme-toggle .icon-sun{ display:block; }
+  :root[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
+  .page{
+    width:100%;
+    max-width:560px;
+  }
+
+  /* Eyebrow / progress */
+  .progress-wrap{
+    margin-bottom: 28px;
+  }
+  .eyebrow{
+    text-align:center;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--amber-light);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .progress-track{
+    height:6px;
+    border-radius:999px;
+    background:rgba(244,236,221,0.1);
+    overflow:hidden;
+    position:relative;
+  }
+  .progress-fill{
+    height:100%;
+    width:75%;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--sediment), var(--amber));
+  }
+  .progress-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--cream-dim);
+    margin-top:6px;
+  }
+
+  /* Hero */
+  .hero{ text-align:center; margin-bottom:28px; }
+  .kicker{
+    color:var(--sage);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(28px, 6vw, 38px);
+    line-height:1.15;
+    color:var(--cream);
+    margin-bottom:14px;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--amber-light);
+  }
+  .sub{
+    color:var(--cream-dim);
+    font-size:16px;
+    line-height:1.5;
+    max-width:440px;
+    margin:0 auto;
+  }
+  .trust-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:18px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--amber-light);
+  }
+
+  /* Video */
+  .video-frame{
+    margin: 28px auto;
+    width:100%;
+    max-width:340px;
+    /* aspect-ratio is set dynamically via JS once the video metadata loads,
+       falling back to 9/16 until then */
+    aspect-ratio: 3/4;
+    border-radius:18px;
+    background:
+      linear-gradient(160deg, var(--cidre-dark-2), #150f0a);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+  }
+  .video-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(244,236,221,0.03) 39px);
+    pointer-events:none;
+  }
+  .video-el{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:inherit;
+    background:#000;
+  }
+  .drip{
+    position:absolute;
+    top:-10px; left:50%;
+    transform:translateX(-50%);
+    width:2px; height:60px;
+    background:linear-gradient(var(--amber), transparent);
+    opacity:0.5;
+    z-index:2;
+  }
+  .play-btn{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:66px; height:66px;
+    border-radius:50%;
+    background:var(--amber);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow: 0 0 0 10px rgba(47,158,111,0.14), 0 8px 24px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    z-index:3;
+  }
+  .play-btn:hover{ transform:translate(-50%,-50%) scale(1.06); }
+  .play-btn svg{ margin-left:4px; }
+  .video-caption{
+    position:absolute;
+    bottom:18px; left:0; right:0;
+    text-align:center;
+    font-size:13px;
+    color:var(--cream-dim);
+    padding:0 20px;
+    z-index:2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+  .video-caption strong{ color:var(--cream); }
+
+  /* Benefits */
+  .benefits{
+    list-style:none;
+    margin: 30px 0;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .benefits li{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    font-size:15px;
+    line-height:1.5;
+    color:var(--cream-dim);
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .benefits li:last-child{ border-bottom:none; padding-bottom:0; }
+  .leaf{
+    flex:none;
+    width:22px; height:22px;
+    margin-top:2px;
+  }
+  .benefits b{ color:var(--cream); font-weight:600; }
+
+  /* Offer card */
+  .offer-card{
+    margin: 32px 0 20px;
+    padding: 22px 20px;
+    border-radius:16px;
+    background: linear-gradient(180deg, rgba(47,158,111,0.10), rgba(47,158,111,0.02));
+    border:1px solid rgba(47,158,111,0.35);
+    text-align:center;
+  }
+  .offer-tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--cidre-dark);
+    background:var(--amber-light);
+    padding:4px 12px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  .price-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .price-old{
+    font-size:16px;
+    color:var(--cream-dim);
+    text-decoration:line-through;
+    opacity:0.7;
+  }
+  .price-new{
+    font-family:'Fraunces', serif;
+    font-size:34px;
+    font-weight:600;
+    color:var(--amber-light);
+  }
+  .price-note{
+    font-size:13px;
+    color:var(--cream-dim);
+    margin-bottom:20px;
+  }
+
+  .cta-btn{
+    display:block;
+    width:100%;
+    padding:16px 20px;
+    border:none;
+    border-radius:12px;
+    background: linear-gradient(180deg, var(--amber-light), var(--amber));
+    color:var(--cidre-dark);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow: 0 10px 24px rgba(47,158,111,0.28);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta-btn:hover{
+    transform:translateY(-2px);
+    box-shadow: 0 14px 30px rgba(47,158,111,0.36);
+  }
+  .cta-sub{
+    text-align:center;
+    font-size:12px;
+    color:var(--cream-dim);
+    margin-top:12px;
+  }
+
+  .decline{
+    display:block;
+    text-align:center;
+    margin-top:26px;
+    font-size:13px;
+    color:var(--cream-dim);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    opacity:0.75;
+  }
+  .decline:hover{ opacity:1; color:var(--cream); }
+
+  .footer-note{
+    text-align:center;
+    font-size:11px;
+    color:var(--cream-dim);
+    opacity:0.55;
+    margin-top:34px;
+    line-height:1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cta-btn, .play-btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème clair/sombre">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+</button>
+
+<div class="page">
+
+  <div class="progress-wrap">
+    <div class="eyebrow">Il ne reste qu'une étape</div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-labels"><span>Commande confirmée</span><span>Offre complémentaire</span></div>
+  </div>
+
+  <div class="hero">
+    <div class="kicker">🍎 Recommandé pour compléter votre programme</div>
+    <h1>Avant de continuer, découvrez <em>le rituel du vinaigre de cidre</em></h1>
+    <p class="sub">Une astuce simple à intégrer à votre routine du soir, expliquée en vidéo en moins de 3 minutes.</p>
+    <div class="trust-row">
+      <span>✓ Contenu vérifié</span>
+      <span>✓ 100% naturel</span>
+      <span>✓ 3 min chrono</span>
+    </div>
+  </div>
+
+  <div class="video-frame" id="video-frame">
+    <div class="drip"></div>
+    <video
+      id="video-player"
+      class="video-el"
+      src="static/videoup1.mp4"
+      playsinline
+      preload="metadata"
+    ></video>
+    <div class="play-btn" id="play-btn" onclick="playVideo()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#0e1a17"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+    <div class="video-caption"><strong id="video-caption-text">Cliquez pour lancer la vidéo</strong><br>Le rituel expliqué pas à pas</div>
+  </div>
+
+  <ul class="benefits">
+    <li>
+      <svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M4 20C4 12 9 5 20 4c1 11-6 16-14 16-1 0-2-.4-2-.4" stroke="#4fb3a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><b>Un geste simple, deux minutes par soir.</b> Aucun matériel spécifique, aucune préparation compliquée.</span>
+    </li>
+    <li>
+      <svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M4 20C4 12 9 5 20 4c1 11-6 16-14 16-1 0-2-.4-2-.4" stroke="#4fb3a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><b>Pensé pour s'intégrer à votre programme actuel.</b> Un complément à ce que vous avez déjà commandé, pas un nouveau point de départ.</span>
+    </li>
+    <li>
+      <svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M4 20C4 12 9 5 20 4c1 11-6 16-14 16-1 0-2-.4-2-.4" stroke="#4fb3a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><b>Guide vidéo + fiche récapitulative.</b> Vous gardez tout, à consulter quand vous voulez.</span>
+    </li>
+  </ul>
+
+  <div class="offer-card">
+    <span class="offer-tag">Réservé aux clients du jour</span>
+    <div class="price-row">
+      <span class="price-old">37€</span>
+      <span class="price-new">17€</span>
+    </div>
+    <p class="price-note">Paiement unique · ajouté directement à votre commande</p>
+  </div>
+
+  <a class="decline" href="../up2/up2.html">Non merci, je continue sans cette offre</a>
+
+  <p class="footer-note">Cette offre complète votre commande initiale et n'affecte pas son traitement, que vous l'acceptiez ou non.</p>
+
+</div>
+
+<script>
+  const video = document.getElementById('video-player');
+  const frame = document.getElementById('video-frame');
+  const playBtn = document.getElementById('play-btn');
+  const captionText = document.getElementById('video-caption-text');
+
+  // Once we know the real video dimensions, resize the card to match
+  // the video's natural aspect ratio instead of the 9/16 fallback.
+  video.addEventListener('loadedmetadata', () => {
+    if (video.videoWidth && video.videoHeight) {
+      frame.style.aspectRatio = video.videoWidth + ' / ' + video.videoHeight;
+    }
+  });
+
+  function playVideo(){
+    captionText.textContent = 'Lecture en cours…';
+    video.play();
+    playBtn.style.display = 'none';
+  }
+
+  video.addEventListener('pause', () => {
+    if (!video.ended) {
+      playBtn.style.display = 'flex';
+      captionText.textContent = 'Cliquez pour reprendre la vidéo';
+    }
+  });
+
+  video.addEventListener('ended', () => {
+    playBtn.style.display = 'flex';
+    captionText.textContent = 'Cliquez pour revoir la vidéo';
+  });
+
+  // Theme toggle: respects saved preference, falls back to system preference.
+  // Uses the same 'rvc-theme' key as the rest of the funnel so the choice persists across pages.
+  (function(){
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var stored = localStorage.getItem('rvc-theme');
+    var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = stored || (systemPrefersDark ? 'dark' : 'light');
+    if (initial === 'light') root.setAttribute('data-theme', 'light');
+
+    toggleBtn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      var next = current === 'light' ? 'dark' : 'light';
+      if (next === 'light') {
+        root.setAttribute('data-theme', 'light');
+      } else {
+        root.removeAttribute('data-theme');
+      }
+      localStorage.setItem('rvc-theme', next);
+    });
+  })();
+</script>
+</body>
+</html>
