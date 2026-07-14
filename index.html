@@ -176,6 +176,82 @@
   }
   .decline:hover{ opacity:1; color:var(--ink); }
 
+  /* Comments (social proof) */
+  .comments{
+    margin: 28px auto 0;
+    max-width:400px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .comments-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink-dim);
+    margin-bottom:2px;
+  }
+  .comment{
+    display:flex;
+    gap:10px;
+  }
+  .comment-avatar{
+    flex:none;
+    width:34px; height:34px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px;
+    font-weight:700;
+    color:#0e1a17;
+    background: linear-gradient(160deg, var(--amber-light), var(--amber));
+  }
+  .comment-body{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 14px;
+    flex:1;
+  }
+  .comment-name-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:2px;
+  }
+  .comment-name{
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .comment-time{
+    font-size:11.5px;
+    color:var(--ink-dim);
+    opacity:0.8;
+  }
+  .comment-text{
+    font-size:13.5px;
+    color:var(--ink-dim);
+    line-height:1.5;
+  }
+  .comment-likes{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-top:6px;
+    font-size:11.5px;
+    color:var(--ink-dim);
+    opacity:0.75;
+  }
+  .comments-flag{
+    text-align:center;
+    font-size:11px;
+    color:var(--ink-dim);
+    opacity:0.7;
+    margin-top:4px;
+  }
+
   /* Sections */
   section{ padding: 44px 0; border-top:1px solid var(--line); transition: border-color 0.25s ease; }
   .section-title{
@@ -371,6 +447,44 @@
 
     <div class="video-frame">
       <vturb-smartplayer id="vid-6a56a1dca1ac5bc77f5f7454" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 133.33333333333331% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+    </div>
+
+    <div class="comments">
+      <div class="comments-title">💬 Commentaires</div>
+      <div class="comment">
+        <div class="comment-avatar">MC</div>
+        <div class="comment-body">
+          <div class="comment-name-row">
+            <span class="comment-name">Marie C.</span>
+            <span class="comment-time">il y a 2 j</span>
+          </div>
+          <p class="comment-text">Franchement sceptique au début, mais le rituel est hyper simple à suivre.</p>
+          <div class="comment-likes">👍 24</div>
+        </div>
+      </div>
+      <div class="comment">
+        <div class="comment-avatar">SL</div>
+        <div class="comment-body">
+          <div class="comment-name-row">
+            <span class="comment-name">Sophie L.</span>
+            <span class="comment-time">il y a 5 j</span>
+          </div>
+          <p class="comment-text">J'ai regardé jusqu'au bout, ça vaut le coup. Merci pour l'explication claire.</p>
+          <div class="comment-likes">👍 17</div>
+        </div>
+      </div>
+      <div class="comment">
+        <div class="comment-avatar">JD</div>
+        <div class="comment-body">
+          <div class="comment-name-row">
+            <span class="comment-name">Julie D.</span>
+            <span class="comment-time">il y a 1 sem</span>
+          </div>
+          <p class="comment-text">2 minutes par soir, aucune contrainte, exactement ce que je cherchais.</p>
+          <div class="comment-likes">👍 9</div>
+        </div>
+      </div>
+      <p class="comments-flag">Exemples — à remplacer par de vrais commentaires/avis clients avant publication.</p>
     </div>
   </section>
 
