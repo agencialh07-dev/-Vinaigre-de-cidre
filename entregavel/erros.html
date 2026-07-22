@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour que le rituel fonctionne bien — Rituel du vinaigre de cidre</title>
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../favicon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#2f9e6f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6faf8;
+    --bg-2: #ffffff;
+    --ink: #16241f;
+    --ink-dim: #5c7169;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #1f7a54;
+    --sage: #2f8c7f;
+    --line: rgba(22,36,31,0.10);
+    --header-bg: rgba(246,250,248,0.92);
+    --miss-bg: rgba(226,138,60,0.08);
+    --miss-border: rgba(226,138,60,0.3);
+    --miss-ink: #a86a1f;
+    --fix-bg: rgba(47,158,111,0.08);
+    --fix-border: rgba(47,158,111,0.3);
+  }
+  :root[data-theme="dark"]{
+    --bg: #0e1a17;
+    --bg-2: #13241f;
+    --ink: #eef5f1;
+    --ink-dim: #a9c2b8;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #5ecb9a;
+    --sage: #4fb3a8;
+    --line: rgba(238,245,241,0.10);
+    --header-bg: rgba(14,26,23,0.92);
+    --miss-bg: rgba(226,178,60,0.08);
+    --miss-border: rgba(226,178,60,0.28);
+    --miss-ink: #e2b23c;
+    --fix-bg: rgba(94,203,154,0.08);
+    --fix-border: rgba(94,203,154,0.3);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .wrap{ max-width:680px; margin:0 auto; padding:0 20px; }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .header-inner{
+    max-width:720px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .logo-mark{
+    width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(160deg, var(--amber-light), var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    flex:none;
+  }
+  .header-right{ display:flex; align-items:center; gap:14px; }
+  .header-tag{ font-size:12px; color:var(--ink-dim); white-space:nowrap; font-weight:600; }
+
+  .theme-toggle{
+    flex:none;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-1px); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .icon-sun{ display:none; }
+  .theme-toggle .icon-moon{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-sun{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
+
+  .hero{ padding: 36px 0 8px; text-align:center; }
+  .eyebrow{
+    color:var(--sage);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(26px, 6.5vw, 36px);
+    line-height:1.18;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  h1 em{ font-style:italic; color:var(--amber-deep); }
+  .hero-sub{
+    color:var(--ink-dim);
+    font-size:15.5px;
+    line-height:1.6;
+    max-width:480px;
+    margin:0 auto 8px;
+  }
+  .back-link{
+    display:inline-block;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    opacity:0.8;
+    margin-bottom:6px;
+  }
+  .back-link:hover{ opacity:1; color:var(--ink); }
+
+  .reassure{
+    max-width:480px;
+    margin:18px auto 0;
+    padding:14px 18px;
+    border-radius:12px;
+    background:var(--fix-bg);
+    border:1px solid var(--fix-border);
+    font-size:13.5px;
+    color:var(--ink-dim);
+    line-height:1.55;
+    text-align:center;
+  }
+
+  section{ padding: 36px 0 50px; }
+
+  .points{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .point-card{
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    background:var(--bg-2);
+  }
+  .point-miss, .point-fix{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding:16px 20px;
+  }
+  .point-miss{
+    background:var(--miss-bg);
+    border-bottom:1px solid var(--line);
+  }
+  .point-fix{ background:transparent; }
+  .point-mark{ flex:none; font-size:16px; line-height:1.4; }
+  .point-miss .point-mark{ color:var(--miss-ink); }
+  .point-fix .point-mark{ color:var(--amber-deep); }
+  .point-title{ font-size:14.5px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+  .point-text{ font-size:13.5px; color:var(--ink-dim); line-height:1.55; }
+
+  .closing{
+    margin-top:30px;
+    text-align:center;
+    font-size:14.5px;
+    color:var(--ink-dim);
+    line-height:1.6;
+    max-width:440px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .closing strong{ color:var(--ink); }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding: 26px 0 40px;
+    text-align:center;
+    transition: border-color 0.25s ease;
+  }
+  footer p{
+    font-size:11px;
+    color:var(--ink-dim);
+    opacity:0.8;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">🍎</span> Rituel Vinaigre de Cidre</div>
+    <div class="header-right">
+      <div class="header-tag">Bien démarrer</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème clair/sombre">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section style="padding-bottom:0;">
+    <div class="hero" style="padding-top:0;">
+      <a class="back-link" href="index.html">← Retour à votre espace</a>
+      <div class="eyebrow">Espace client · Bien démarrer</div>
+      <h1>Pour profiter au mieux <em>du rituel</em></h1>
+      <p class="hero-sub">Quatre points simples, qui font toute la différence entre « ça n'a pas marché » et « ça marche vraiment ».</p>
+      <div class="reassure">Rien d'alarmant ici — juste de quoi bien démarrer du bon pied et éviter les petites confusions les plus courantes.</div>
+    </div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="points">
+
+      <div class="point-card">
+        <div class="point-miss">
+          <div class="point-mark">❌</div>
+          <div>
+            <div class="point-title">Utiliser la mauvaise quantité</div>
+            <div class="point-text">Mettre trop de vinaigre en pensant « aller plus vite » peut irriter l'estomac et rendre le rituel désagréable, sans apporter davantage de bénéfices.</div>
+          </div>
+        </div>
+        <div class="point-fix">
+          <div class="point-mark">✅</div>
+          <div>
+            <div class="point-title">Ce qu'on recommande</div>
+            <div class="point-text">1 à 2 cuillères à soupe dans un grand verre d'eau, comme expliqué dans le module « Le rituel, étape par étape ». C'est suffisant — la régularité fait le reste.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-miss">
+          <div class="point-mark">❌</div>
+          <div>
+            <div class="point-title">Le prendre à un horaire irrégulier</div>
+            <div class="point-text">Le faire un jour le matin, un jour le soir, un jour pas du tout, rend plus difficile la construction de l'habitude.</div>
+          </div>
+        </div>
+        <div class="point-fix">
+          <div class="point-mark">✅</div>
+          <div>
+            <div class="point-title">Ce qu'on recommande</div>
+            <div class="point-text">Choisissez un seul moment qui vous convient et gardez-le. C'est ce petit ancrage quotidien qui fait la différence sur la durée.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-miss">
+          <div class="point-mark">❌</div>
+          <div>
+            <div class="point-title">Abandonner après les premiers jours</div>
+            <div class="point-text">Les tout premiers jours sont surtout une phase d'adaptation. Beaucoup de personnes arrêtent juste avant de commencer à ressentir une différence.</div>
+          </div>
+        </div>
+        <div class="point-fix">
+          <div class="point-mark">✅</div>
+          <div>
+            <div class="point-title">Ce qu'on recommande</div>
+            <div class="point-text">Donnez-vous au moins quelques semaines avant de faire un premier bilan. Votre checklist quotidienne est là pour vous aider à tenir le cap.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-miss">
+          <div class="point-mark">❌</div>
+          <div>
+            <div class="point-title">Attendre un résultat en 24 heures</div>
+            <div class="point-text">Ce n'est pas un remède miracle instantané, et personne ne vous a promis ça. Espérer un changement du jour au lendemain mène surtout à la déception.</div>
+          </div>
+        </div>
+        <div class="point-fix">
+          <div class="point-mark">✅</div>
+          <div>
+            <div class="point-title">Ce qu'on recommande</div>
+            <div class="point-text">Voyez ce rituel comme une habitude qui s'installe progressivement, pas comme un interrupteur. C'est justement ce qui le rend durable.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="closing"><strong>L'essentiel à retenir :</strong> un petit geste, fait au bon moment, avec la bonne quantité, répété avec patience. C'est tout ce qu'il faut pour bien commencer.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Ce contenu est fourni à titre informatif et ne remplace pas un avis médical. Les résultats peuvent varier d'une personne à l'autre. En cas de doute, consultez un professionnel de santé.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var stored = localStorage.getItem('rvc-theme');
+    var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = stored || (systemPrefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    toggleBtn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('rvc-theme', next);
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Votre checklist du jour — Rituel du vinaigre de cidre</title>
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../favicon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#2f9e6f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6faf8;
+    --bg-2: #ffffff;
+    --ink: #16241f;
+    --ink-dim: #5c7169;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #1f7a54;
+    --sage: #2f8c7f;
+    --line: rgba(22,36,31,0.10);
+    --card: #ffffff;
+    --header-bg: rgba(246,250,248,0.92);
+  }
+  :root[data-theme="dark"]{
+    --bg: #0e1a17;
+    --bg-2: #13241f;
+    --ink: #eef5f1;
+    --ink-dim: #a9c2b8;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #5ecb9a;
+    --sage: #4fb3a8;
+    --line: rgba(238,245,241,0.10);
+    --card: #13241f;
+    --header-bg: rgba(14,26,23,0.92);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .wrap{ max-width:640px; margin:0 auto; padding:0 20px; }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .header-inner{
+    max-width:720px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .logo-mark{
+    width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(160deg, var(--amber-light), var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    flex:none;
+  }
+  .header-right{ display:flex; align-items:center; gap:14px; }
+  .header-tag{ font-size:12px; color:var(--ink-dim); white-space:nowrap; font-weight:600; }
+
+  .theme-toggle{
+    flex:none;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-1px); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .icon-sun{ display:none; }
+  .theme-toggle .icon-moon{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-sun{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
+
+  .hero{ padding: 36px 0 8px; text-align:center; }
+  .eyebrow{
+    color:var(--sage);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(26px, 6.5vw, 36px);
+    line-height:1.18;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  h1 em{ font-style:italic; color:var(--amber-deep); }
+  .hero-sub{
+    color:var(--ink-dim);
+    font-size:15.5px;
+    line-height:1.6;
+    max-width:460px;
+    margin:0 auto 24px;
+  }
+  .back-link{
+    display:inline-block;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    opacity:0.8;
+    margin-bottom:6px;
+  }
+  .back-link:hover{ opacity:1; color:var(--ink); }
+
+  section{ padding: 8px 0 46px; }
+  .section-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:19px;
+    margin-bottom:6px;
+    color:var(--ink);
+  }
+  .section-sub{
+    color:var(--ink-dim);
+    font-size:13.5px;
+    margin-bottom:18px;
+    line-height:1.5;
+  }
+
+  /* Habit picker chips */
+  .chip-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 14px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    background:var(--bg-2);
+    color:var(--ink-dim);
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    user-select:none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .chip.active{
+    background: linear-gradient(180deg, var(--amber-light), var(--amber));
+    border-color: transparent;
+    color:#0e1a17;
+  }
+
+  /* Today's checklist */
+  .today-card{
+    margin-top:28px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+  }
+  .today-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:14px;
+  }
+  .today-date{ font-size:13px; color:var(--ink-dim); font-weight:600; }
+  .today-pct{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    color:var(--amber-deep);
+  }
+  .progress-track{
+    height:8px;
+    border-radius:999px;
+    background:var(--line);
+    overflow:hidden;
+    margin-bottom:18px;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--amber-deep), var(--amber-light));
+    transition:width 0.3s ease;
+  }
+  .checklist{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .checklist-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .checklist-item:last-child{ border-bottom:none; }
+  .checklist-item input[type="checkbox"]{
+    width:20px; height:20px;
+    accent-color: var(--amber-deep);
+    cursor:pointer;
+    flex:none;
+  }
+  .checklist-item label{
+    font-size:14.5px;
+    color:var(--ink);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .checklist-item.checked label{
+    color:var(--ink-dim);
+    text-decoration:line-through;
+    opacity:0.75;
+  }
+  .empty-note{
+    font-size:13.5px;
+    color:var(--ink-dim);
+    text-align:center;
+    padding:20px 0;
+  }
+  .motivation{
+    margin-top:18px;
+    text-align:center;
+    font-size:14px;
+    font-weight:600;
+    color:var(--amber-deep);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding: 26px 0 40px;
+    text-align:center;
+    transition: border-color 0.25s ease;
+  }
+  footer p{
+    font-size:11px;
+    color:var(--ink-dim);
+    opacity:0.8;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle, body, header, .chip, .progress-fill{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">🍎</span> Rituel Vinaigre de Cidre</div>
+    <div class="header-right">
+      <div class="header-tag">Checklist</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème clair/sombre">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="padding-bottom:0;">
+    <a class="back-link" href="index.html">← Retour à votre espace</a>
+    <div class="eyebrow">Espace client · Checklist</div>
+    <h1>Votre checklist <em>santé du jour</em></h1>
+    <p class="hero-sub">Choisissez les habitudes que vous voulez suivre, puis cochez-les au fil de la journée. Simple, rapide, motivant.</p>
+  </section>
+
+  <section>
+    <div class="section-title">Personnalisez votre checklist</div>
+    <p class="section-sub">Activez les habitudes qui comptent pour vous. Vous pouvez les changer à tout moment.</p>
+    <div class="chip-grid" id="habit-picker"></div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="today-card">
+      <div class="today-head">
+        <span class="today-date" id="today-date"></span>
+        <span class="today-pct" id="today-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="checklist" id="checklist-list"></div>
+      <p class="motivation" id="motivation"></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Ce contenu est fourni à titre informatif et ne remplace pas un avis médical. Les résultats peuvent varier d'une personne à l'autre. En cas de doute, consultez un professionnel de santé.</p>
+  </div>
+</footer>
+
+<script>
+  var HABITS = [
+    { id:'water',      icon:'💧', label:"J'ai bu de l'eau" },
+    { id:'ritual',     icon:'🍎', label:"J'ai fait le rituel" },
+    { id:'sugar',      icon:'🍬', label:"J'ai évité le sucre" },
+    { id:'sleep',      icon:'😴', label:'J\'ai bien dormi' },
+    { id:'walk',       icon:'🚶', label:'20 minutes de marche' },
+    { id:'veggies',    icon:'🥦', label:'J\'ai mangé des légumes' },
+    { id:'fried',      icon:'🍟', label:'J\'ai évité les fritures' },
+    { id:'stretch',    icon:'🧘', label:'Je me suis étiré(e)' },
+    { id:'soda',       icon:'🥤', label:'Moins de sodas' },
+    { id:'earlysleep', icon:'🌙', label:'Couché(e) avant minuit' }
+  ];
+  var DEFAULT_ACTIVE = ['water','ritual','sugar','sleep','walk'];
+  var ACTIVE_KEY = 'rvc-checklist-active';
+
+  function todayKey(){
+    var d = new Date();
+    return 'rvc-checklist-done-' + d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+  }
+  function getActive(){
+    try{
+      var a = JSON.parse(localStorage.getItem(ACTIVE_KEY));
+      if (Array.isArray(a)) return a;
+    }catch(e){}
+    return DEFAULT_ACTIVE.slice();
+  }
+  function setActive(arr){ localStorage.setItem(ACTIVE_KEY, JSON.stringify(arr)); }
+  function getDone(){
+    try{
+      var a = JSON.parse(localStorage.getItem(todayKey()));
+      if (Array.isArray(a)) return a;
+    }catch(e){}
+    return [];
+  }
+  function setDone(arr){ localStorage.setItem(todayKey(), JSON.stringify(arr)); }
+
+  function habitById(id){
+    for (var i=0;i<HABITS.length;i++) if (HABITS[i].id === id) return HABITS[i];
+    return null;
+  }
+
+  function renderPicker(){
+    var active = getActive();
+    var wrap = document.getElementById('habit-picker');
+    wrap.innerHTML = '';
+    HABITS.forEach(function(h){
+      var chip = document.createElement('div');
+      chip.className = 'chip' + (active.indexOf(h.id) > -1 ? ' active' : '');
+      chip.innerHTML = '<span>' + h.icon + '</span><span>' + h.label + '</span>';
+      chip.addEventListener('click', function(){
+        var a = getActive();
+        var idx = a.indexOf(h.id);
+        if (idx > -1) { a.splice(idx, 1); } else { a.push(h.id); }
+        setActive(a);
+        renderPicker();
+        renderChecklist();
+      });
+      wrap.appendChild(chip);
+    });
+  }
+
+  function motivational(pct, activeCount){
+    if (activeCount === 0) return 'Activez au moins une habitude ci-dessus pour commencer.';
+    if (pct === 0) return 'On commence ! Cochez le premier élément de la journée.';
+    if (pct < 50) return 'Bon début — continuez comme ça.';
+    if (pct < 100) return 'Vous y êtes presque !';
+    return 'Journée complète ! Bravo 🎉';
+  }
+
+  function renderChecklist(){
+    var active = getActive();
+    var done = getDone();
+    var list = document.getElementById('checklist-list');
+    list.innerHTML = '';
+
+    if (active.length === 0){
+      list.innerHTML = '<p class="empty-note">Aucune habitude activée pour le moment. Choisissez ci-dessus ce qui vous convient.</p>';
+    } else {
+      active.forEach(function(id, i){
+        var h = habitById(id);
+        if (!h) return;
+        var checked = done.indexOf(id) > -1;
+        var row = document.createElement('div');
+        row.className = 'checklist-item' + (checked ? ' checked' : '');
+        var cbId = 'chk-' + id;
+        row.innerHTML =
+          '<input type="checkbox" id="' + cbId + '"' + (checked ? ' checked' : '') + '>' +
+          '<label for="' + cbId + '"><span>' + h.icon + '</span>' + h.label + '</label>';
+        list.appendChild(row);
+        row.querySelector('input').addEventListener('change', function(e){
+          var d = getDone();
+          var idx = d.indexOf(id);
+          if (e.target.checked && idx === -1) d.push(id);
+          if (!e.target.checked && idx > -1) d.splice(idx, 1);
+          setDone(d);
+          row.classList.toggle('checked', e.target.checked);
+          updateProgress();
+        });
+      });
+    }
+    updateProgress();
+  }
+
+  function updateProgress(){
+    var active = getActive();
+    var done = getDone().filter(function(id){ return active.indexOf(id) > -1; });
+    var pct = active.length ? Math.round((done.length / active.length) * 100) : 0;
+    document.getElementById('today-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('motivation').textContent = motivational(pct, active.length);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var stored = localStorage.getItem('rvc-theme');
+    var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = stored || (systemPrefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    toggleBtn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('rvc-theme', next);
+    });
+
+    var months = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+    var d = new Date();
+    document.getElementById('today-date').textContent = "Aujourd'hui · " + d.getDate() + ' ' + months[d.getMonth()];
+
+    renderPicker();
+    renderChecklist();
+  });
+</script>
+
+</body>
+</html>

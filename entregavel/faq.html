@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questions fréquentes — Rituel du vinaigre de cidre</title>
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../favicon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#2f9e6f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6faf8;
+    --bg-2: #ffffff;
+    --ink: #16241f;
+    --ink-dim: #5c7169;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #1f7a54;
+    --sage: #2f8c7f;
+    --line: rgba(22,36,31,0.10);
+    --header-bg: rgba(246,250,248,0.92);
+  }
+  :root[data-theme="dark"]{
+    --bg: #0e1a17;
+    --bg-2: #13241f;
+    --ink: #eef5f1;
+    --ink-dim: #a9c2b8;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #5ecb9a;
+    --sage: #4fb3a8;
+    --line: rgba(238,245,241,0.10);
+    --header-bg: rgba(14,26,23,0.92);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .wrap{ max-width:680px; margin:0 auto; padding:0 20px; }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .header-inner{
+    max-width:720px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .logo-mark{
+    width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(160deg, var(--amber-light), var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    flex:none;
+  }
+  .header-right{ display:flex; align-items:center; gap:14px; }
+  .header-tag{ font-size:12px; color:var(--ink-dim); white-space:nowrap; font-weight:600; }
+
+  .theme-toggle{
+    flex:none;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-1px); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .icon-sun{ display:none; }
+  .theme-toggle .icon-moon{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-sun{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
+
+  .hero{ padding: 36px 0 8px; text-align:center; }
+  .eyebrow{
+    color:var(--sage);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(26px, 6.5vw, 36px);
+    line-height:1.18;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  h1 em{ font-style:italic; color:var(--amber-deep); }
+  .hero-sub{
+    color:var(--ink-dim);
+    font-size:15.5px;
+    line-height:1.6;
+    max-width:480px;
+    margin:0 auto 20px;
+  }
+  .back-link{
+    display:inline-block;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    opacity:0.8;
+    margin-bottom:6px;
+  }
+  .back-link:hover{ opacity:1; color:var(--ink); }
+
+  /* Category jump nav */
+  .cat-nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .cat-nav a{
+    font-size:13px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    color:var(--ink-dim);
+    text-decoration:none;
+  }
+  .cat-nav a:hover{ color:var(--ink); border-color: rgba(47,158,111,0.4); }
+
+  section{ padding: 40px 0; border-top:1px solid var(--line); }
+  section:first-of-type{ border-top:none; }
+  .cat-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(20px, 5vw, 24px);
+    margin-bottom:6px;
+    color:var(--ink);
+  }
+  .cat-sub{
+    color:var(--ink-dim);
+    font-size:14px;
+    margin-bottom:24px;
+    line-height:1.5;
+  }
+
+  .faq-item{ border-bottom:1px solid var(--line); padding:16px 0; }
+  .faq-item:last-child{ border-bottom:none; }
+  .faq-q{ font-size:15px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+  .faq-a{ font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
+  .faq-a strong{ color:var(--ink); }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding: 26px 0 40px;
+    text-align:center;
+    transition: border-color 0.25s ease;
+  }
+  footer p{
+    font-size:11px;
+    color:var(--ink-dim);
+    opacity:0.8;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">🍎</span> Rituel Vinaigre de Cidre</div>
+    <div class="header-right">
+      <div class="header-tag">FAQ</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème clair/sombre">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="border-top:none; padding-bottom:0;">
+    <a class="back-link" href="index.html">← Retour à votre espace</a>
+    <div class="eyebrow">Espace client · Questions fréquentes</div>
+    <h1>Des questions ? <em>On y répond.</em></h1>
+    <p class="hero-sub">Tout ce qu'on nous demande le plus souvent, sur le rituel comme sur votre espace client.</p>
+    <div class="cat-nav">
+      <a href="#methode">Sur le rituel</a>
+      <a href="#acces">Sur votre accès</a>
+    </div>
+  </section>
+
+  <section id="methode">
+    <div class="cat-title">🍎 Sur le rituel</div>
+    <p class="cat-sub">Les questions les plus fréquentes sur la méthode elle-même.</p>
+
+    <div class="faq-item">
+      <div class="faq-q">Puis-je le faire à jeun ?</div>
+      <div class="faq-a">Oui, beaucoup de personnes préfèrent le faire à jeun le matin, ou le soir avant de dormir. Ce qui compte le plus, c'est de choisir un moment que vous pouvez répéter chaque jour, plutôt que l'heure exacte.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Les personnes diabétiques peuvent-elles le faire ?</div>
+      <div class="faq-a">Le vinaigre de cidre peut influencer la glycémie et interagir avec certains médicaments. Si vous êtes diabétique ou suivez un traitement, <strong>parlez-en d'abord à votre médecin</strong> avant de commencer le rituel.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Puis-je boire du café le même jour ?</div>
+      <div class="faq-a">Oui, sans problème. Le rituel n'empêche pas de boire du café — évitez simplement de mélanger les deux dans la même boisson.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Puis-je remplacer le vinaigre par du citron ?</div>
+      <div class="faq-a">Le citron a des propriétés différentes de celles du vinaigre de cidre. Vous pouvez l'intégrer ailleurs dans votre routine, mais il ne remplace pas le rituel présenté dans les modules.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Combien de temps avant de voir une différence ?</div>
+      <div class="faq-a">Cela varie d'une personne à l'autre. L'essentiel est de rester régulier pendant les premières semaines avant de juger des résultats — voyez le module « Le rituel, étape par étape » pour plus de détails.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Que se passe-t-il si j'oublie un jour ?</div>
+      <div class="faq-a">Rien de grave. Reprenez normalement le lendemain — la régularité sur la durée compte bien plus que la perfection au jour le jour.</div>
+    </div>
+  </section>
+
+  <section id="acces">
+    <div class="cat-title">🔑 Sur votre accès</div>
+    <p class="cat-sub">Les questions liées à votre espace client et aux modules.</p>
+
+    <div class="faq-item">
+      <div class="faq-q">Comment accéder aux modules vidéo ?</div>
+      <div class="faq-a">Depuis votre espace client, cliquez sur « Modules en vidéo ». Vous pouvez les regarder autant de fois que vous le souhaitez, à votre rythme.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Dois-je suivre l'ordre des modules ?</div>
+      <div class="faq-a">C'est recommandé, car chaque module s'appuie sur le précédent. Mais vous pouvez revenir sur n'importe lequel à tout moment.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Comment fonctionne la checklist ?</div>
+      <div class="faq-a">Vous choisissez les habitudes que vous voulez suivre, puis vous les cochez chaque jour depuis la page « Checklist ». Votre progression est enregistrée automatiquement sur cet appareil.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Puis-je accéder à mon espace depuis mon téléphone ?</div>
+      <div class="faq-a">Oui, tout l'espace a été conçu pour fonctionner aussi bien sur téléphone, tablette que sur ordinateur.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">J'ai perdu le lien de mon espace, que faire ?</div>
+      <div class="faq-a">Contactez le support à l'adresse indiquée dans votre e-mail de confirmation de commande — nous vous renverrons l'accès rapidement.</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Ce contenu est fourni à titre informatif et ne remplace pas un avis médical. Les résultats peuvent varier d'une personne à l'autre. En cas de doute, consultez un professionnel de santé.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var stored = localStorage.getItem('rvc-theme');
+    var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = stored || (systemPrefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    toggleBtn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('rvc-theme', next);
+    });
+  });
+</script>
+
+</body>
+</html>

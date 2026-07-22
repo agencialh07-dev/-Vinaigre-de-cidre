@@ -294,6 +294,10 @@
     <vturb-smartplayer id="vid-6a557eb118c70e871b24021d" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 133.33333333333331% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
   </div>
 
+  <div id="unlock-cta-wrap" style="display:none; margin: 0 0 28px;">
+    <button onclick="acceptUpsell('https://app.kashpay.com.br/u/ec0ddb478a6a4fa9')" style="font-family: 'Arial'; font-size: 20px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #0F8A43; border: none; border-radius: 14px; padding: 13px 7%; cursor: pointer; text-align: center; display: block; margin: auto;">OUI ! JE VEUX ÉQUILIBRER MES HORMONES</button>
+  </div>
+
   <div class="stack">
     <div class="stack-title">Ce qui est inclus dans cette offre</div>
     <div class="stack-item">
@@ -302,7 +306,7 @@
     </div>
   </div>
 
-  <a class="decline" href="../up3/up3.html">Non merci, je continue avec le guide seul</a>
+  <a class="decline" href="../up3/up3.html">NON, JE PRÉFÈRE CONTINUER À SOUFFRIR DES SYMPTÔMES DE LA MÉNOPAUSE</a>
 
   <p class="footer-note">Cette offre complète votre commande initiale et n'affecte pas son traitement, que vous l'acceptiez ou non.</p>
 
@@ -330,6 +334,12 @@
       localStorage.setItem('rvc-theme', next);
     });
   })();
+
+  // Reveal the unlock button 215 seconds after the page loads.
+  setTimeout(function(){
+    var el = document.getElementById('unlock-cta-wrap');
+    if (el) el.style.display = 'block';
+  }, 215 * 1000);
 </script>
 
 <script type="text/javascript">

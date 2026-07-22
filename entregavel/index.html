@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Votre espace — Le rituel du vinaigre de cidre</title>
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../favicon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#2f9e6f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6faf8;
+    --bg-2: #ffffff;
+    --ink: #16241f;
+    --ink-dim: #5c7169;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #1f7a54;
+    --sage: #2f8c7f;
+    --line: rgba(22,36,31,0.10);
+    --card: #ffffff;
+    --header-bg: rgba(246,250,248,0.92);
+  }
+
+  :root[data-theme="dark"]{
+    --bg: #0e1a17;
+    --bg-2: #13241f;
+    --ink: #eef5f1;
+    --ink-dim: #a9c2b8;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #5ecb9a;
+    --sage: #4fb3a8;
+    --line: rgba(238,245,241,0.10);
+    --card: #13241f;
+    --header-bg: rgba(14,26,23,0.92);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 20px; }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .header-inner{
+    max-width:720px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .logo-mark{
+    width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(160deg, var(--amber-light), var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    flex:none;
+  }
+  .header-right{ display:flex; align-items:center; gap:14px; }
+  .header-tag{ font-size:12px; color:var(--ink-dim); white-space:nowrap; }
+
+  .theme-toggle{
+    flex:none;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-1px); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .icon-sun{ display:none; }
+  .theme-toggle .icon-moon{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-sun{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
+
+  .hero{ padding: 40px 0 8px; text-align:center; }
+  .eyebrow{
+    color:var(--sage);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(28px, 7vw, 42px);
+    line-height:1.15;
+    margin-bottom:16px;
+    color:var(--ink);
+  }
+  h1 em{ font-style:italic; color:var(--amber-deep); }
+  .hero-sub{
+    color:var(--ink-dim);
+    font-size:16px;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto 10px;
+  }
+
+  section{ padding: 44px 0; border-top:1px solid var(--line); transition: border-color 0.25s ease; }
+  .section-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(22px, 5vw, 28px);
+    text-align:center;
+    margin-bottom:8px;
+    color:var(--ink);
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--ink-dim);
+    font-size:14.5px;
+    max-width:460px;
+    margin:0 auto 32px;
+    line-height:1.5;
+  }
+
+  /* Nav grid — links to every section of the client area */
+  .nav-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:14px;
+  }
+  @media (min-width: 560px){
+    .nav-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  .nav-card{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+    text-decoration:none;
+    box-shadow: 0 2px 10px rgba(22,36,31,0.04);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+  }
+  .nav-card:hover{ transform:translateY(-2px); border-color: rgba(47,158,111,0.4); }
+  .nav-icon{
+    width:44px; height:44px;
+    border-radius:12px;
+    background: linear-gradient(160deg, var(--amber-light), var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px;
+  }
+  .nav-card h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:17px;
+    color:var(--ink);
+  }
+  .nav-card p{
+    color:var(--ink-dim);
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  .nav-progress{
+    display:inline-block;
+    margin-top:2px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--amber-deep);
+  }
+
+  /* Steps */
+  .steps{ display:flex; flex-direction:column; gap:0; }
+  .step{ display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--line); }
+  .step:last-child{ border-bottom:none; }
+  .step-num{
+    flex:none;
+    width:32px; height:32px;
+    border-radius:50%;
+    border:1px solid rgba(47,158,111,0.4);
+    color:var(--amber-deep);
+    font-weight:700;
+    font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step h4{ font-size:15px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+  .step p{ font-size:13.5px; color:var(--ink-dim); line-height:1.55; }
+
+  /* Benefits grid (science section) */
+  .benefits-grid{ display:grid; grid-template-columns: 1fr; gap:14px; }
+  @media (min-width: 560px){ .benefits-grid{ grid-template-columns: 1fr 1fr; } }
+  .benefit-card{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    box-shadow: 0 2px 10px rgba(22,36,31,0.04);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .benefit-icon{
+    width:38px; height:38px;
+    border-radius:10px;
+    background: rgba(47,158,111,0.10);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px;
+    font-size:18px;
+  }
+  .benefit-card h3{ font-size:16px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+  .benefit-card p{ font-size:13.5px; color:var(--ink-dim); line-height:1.55; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding: 26px 0 40px;
+    text-align:center;
+    transition: border-color 0.25s ease;
+  }
+  footer p{
+    font-size:11px;
+    color:var(--ink-dim);
+    opacity:0.8;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle, body, header, section, .benefit-card, .hub-btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">🍎</span> Rituel Vinaigre de Cidre</div>
+    <div class="header-right">
+      <div class="header-tag">Espace client</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème clair/sombre">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div class="eyebrow">Accès complet · Merci pour votre confiance</div>
+    <h1>Votre guide complet, <em>au-delà de la vidéo</em></h1>
+    <p class="hero-sub">Vous avez tout ce qu'il vous faut ici : les modules vidéo, le rituel détaillé étape par étape, et les explications sur pourquoi ce geste simple fonctionne.</p>
+  </section>
+
+  <section>
+    <div class="section-title">Votre espace complet</div>
+    <p class="section-sub">Tout ce qu'il vous faut pour appliquer le rituel avec confiance.</p>
+    <div class="nav-grid">
+      <a class="nav-card" href="aulas.html">
+        <div class="nav-icon">🎬</div>
+        <h3>Modules en vidéo</h3>
+        <p>5 vidéos courtes, à suivre dans l'ordre.</p>
+        <span class="nav-progress" id="modules-progress-tag">0 sur 5 terminés</span>
+      </a>
+      <a class="nav-card" href="checklist.html">
+        <div class="nav-icon">✅</div>
+        <h3>Checklist du jour</h3>
+        <p>Construisez votre checklist santé et suivez vos habitudes au quotidien.</p>
+      </a>
+      <a class="nav-card" href="faq.html">
+        <div class="nav-icon">💬</div>
+        <h3>Questions fréquentes</h3>
+        <p>Toutes les réponses, sur le rituel comme sur votre accès.</p>
+      </a>
+      <a class="nav-card" href="erros.html">
+        <div class="nav-icon">🎯</div>
+        <h3>Pour bien démarrer</h3>
+        <p>Les points à connaître pour profiter au mieux du rituel.</p>
+      </a>
+      <a class="nav-card" href="receitas.html">
+        <div class="nav-icon">🍽️</div>
+        <h3>Recettes bonus</h3>
+        <p>5 recettes simples pour compléter votre routine.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Le rituel, étape par étape</div>
+    <p class="section-sub">La version complète, au-delà de ce qui est montré dans la vidéo de présentation.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Choisissez le bon moment</h4>
+          <p>Le soir, environ 30 minutes avant le repas ou avant de dormir. L'essentiel est de choisir un moment que vous pouvez répéter chaque jour.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Le bon dosage</h4>
+          <p>1 à 2 cuillères à soupe de vinaigre de cidre dans un grand verre d'eau (environ 200 à 250 ml). Pas besoin d'en mettre davantage pour que ça fonctionne.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Adoucissez si besoin</h4>
+          <p>Le goût peut être fort au début. Un peu de miel, de citron ou de cannelle rend le mélange plus agréable, sans en réduire l'intérêt.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>La régularité compte plus que la quantité</h4>
+          <p>Un petit verre chaque soir apporte plus de résultats qu'une grande quantité prise de temps en temps. C'est un rituel, pas une cure ponctuelle.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div>
+          <h4>Écoutez votre corps</h4>
+          <p>Estomac sensible ? Diluez davantage et commencez par une seule cuillère. Ajustez progressivement selon votre ressenti.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div>
+          <h4>Ce qu'il faut éviter</h4>
+          <p>Ne buvez jamais le vinaigre pur (non dilué) : cela peut irriter la gorge et l'émail des dents. Un rince-bouche à l'eau claire après, ou une paille, permet d'éviter tout inconfort.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Pourquoi ce rituel fonctionne</div>
+    <p class="section-sub">Les mécanismes derrière un geste simple.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🍽️</div>
+        <h3>Sensation de satiété</h3>
+        <p>L'acide acétique du vinaigre de cidre peut ralentir la vidange gastrique, ce qui aide à se sentir rassasié plus longtemps après le repas.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📉</div>
+        <h3>Réponse glycémique</h3>
+        <p>Pris avant ou pendant un repas, il peut atténuer les pics de glycémie qui suivent souvent les repas riches en glucides.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔁</div>
+        <h3>Un rituel, pas juste une boisson</h3>
+        <p>Le fait de répéter un petit geste fixe chaque soir aide à ancrer d'autres habitudes plus saines autour de lui, presque sans y penser.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🍎</div>
+        <h3>Un geste ancien, revisité</h3>
+        <p>Le vinaigre de cidre est utilisé depuis des générations dans plusieurs cultures. Il est aujourd'hui étudié de plus près pour comprendre ses effets réels.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Ce contenu est fourni à titre informatif et ne remplace pas un avis médical. Les résultats peuvent varier d'une personne à l'autre. En cas de doute, consultez un professionnel de santé.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var stored = localStorage.getItem('rvc-theme');
+    var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = stored || (systemPrefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    toggleBtn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('rvc-theme', next);
+    });
+
+    var TOTAL_MODULES = 5;
+    var done = [false, false, false, false, false];
+    try{
+      var a = JSON.parse(localStorage.getItem('rvc-modules-done'));
+      if (Array.isArray(a) && a.length === TOTAL_MODULES) done = a;
+    }catch(e){}
+    var count = done.filter(Boolean).length;
+    document.getElementById('modules-progress-tag').textContent = count + ' sur ' + TOTAL_MODULES + ' terminés';
+  });
+</script>
+
+</body>
+</html>

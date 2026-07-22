@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vos modules vidéo — Rituel du vinaigre de cidre</title>
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../favicon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#2f9e6f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6faf8;
+    --bg-2: #ffffff;
+    --ink: #16241f;
+    --ink-dim: #5c7169;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #1f7a54;
+    --sage: #2f8c7f;
+    --line: rgba(22,36,31,0.10);
+    --card: #ffffff;
+    --header-bg: rgba(246,250,248,0.92);
+    --placeholder-bg: rgba(47,158,111,0.06);
+  }
+
+  :root[data-theme="dark"]{
+    --bg: #0e1a17;
+    --bg-2: #13241f;
+    --ink: #eef5f1;
+    --ink-dim: #a9c2b8;
+    --amber: #2f9e6f;
+    --amber-light: #5ecb9a;
+    --amber-deep: #5ecb9a;
+    --sage: #4fb3a8;
+    --line: rgba(238,245,241,0.10);
+    --card: #13241f;
+    --header-bg: rgba(14,26,23,0.92);
+    --placeholder-bg: rgba(94,203,154,0.06);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 20px; }
+  a{ color:inherit; }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .header-inner{
+    max-width:720px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .logo-mark{
+    width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(160deg, var(--amber-light), var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    flex:none;
+  }
+  .header-right{ display:flex; align-items:center; gap:14px; }
+  .header-tag{ font-size:12px; color:var(--ink-dim); white-space:nowrap; font-weight:600; }
+
+  .theme-toggle{
+    flex:none;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ transform:translateY(-1px); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .icon-sun{ display:none; }
+  .theme-toggle .icon-moon{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-sun{ display:block; }
+  :root[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
+
+  .hero{ padding: 40px 0 8px; text-align:center; }
+  .eyebrow{
+    color:var(--sage);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(28px, 7vw, 40px);
+    line-height:1.15;
+    margin-bottom:16px;
+    color:var(--ink);
+  }
+  h1 em{ font-style:italic; color:var(--amber-deep); }
+  .hero-sub{
+    color:var(--ink-dim);
+    font-size:16px;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto 24px;
+  }
+  .back-link{
+    display:inline-block;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    opacity:0.8;
+    margin-bottom:6px;
+  }
+  .back-link:hover{ opacity:1; color:var(--ink); }
+
+  /* Overall progress */
+  .progress-card{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:20px 22px;
+    margin-bottom:8px;
+  }
+  .progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:10px;
+  }
+  .progress-count{ font-size:14px; font-weight:600; color:var(--ink); }
+  .progress-pct{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    color:var(--amber-deep);
+  }
+  .progress-track{
+    height:8px;
+    border-radius:999px;
+    background:var(--line);
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--amber-deep), var(--amber-light));
+    transition:width 0.3s ease;
+  }
+
+  section{ padding: 20px 0 50px; }
+
+  .modules{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .module-card{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    background:var(--bg-2);
+    border:1.5px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+    box-shadow: 0 2px 10px rgba(22,36,31,0.04);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .module-card.done{ border-color: rgba(47,158,111,0.5); }
+  @media (min-width: 620px){
+    .module-card{ flex-direction:row; align-items:flex-start; }
+    .module-video-col{ flex:none; width:180px; }
+    .module-body{ flex:1; }
+  }
+  .module-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:4px;
+  }
+  .module-num{
+    position:relative;
+    flex:none;
+    width:34px; height:34px;
+    border-radius:50%;
+    background: linear-gradient(160deg, var(--amber-light), var(--amber));
+    color:#0e1a17;
+    font-weight:700;
+    font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .module-num .check-badge{
+    display:none;
+    position:absolute;
+    bottom:-4px; right:-4px;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--amber-deep);
+    color:#fff;
+    font-size:10px;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--bg-2);
+  }
+  .module-card.done .check-badge{ display:flex; }
+  .module-body h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--ink);
+  }
+  .module-body p{
+    font-size:13.5px;
+    color:var(--ink-dim);
+    line-height:1.55;
+    margin-top:6px;
+  }
+  .module-video-col{ margin:0 auto; width:100%; max-width:220px; }
+
+  .video-placeholder{
+    position:relative;
+    width:100%;
+    padding-top:133.33%;
+    border-radius:12px;
+    border:1.5px dashed rgba(47,158,111,0.4);
+    background:var(--placeholder-bg);
+    overflow:hidden;
+  }
+  .video-placeholder-inner{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    text-align:center;
+    padding:12px;
+  }
+  .video-placeholder-inner .icon{ font-size:24px; }
+  .video-placeholder-inner span{
+    font-size:11.5px;
+    color:var(--ink-dim);
+    line-height:1.4;
+  }
+
+  .watch-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .watch-row input[type="checkbox"]{
+    width:18px; height:18px;
+    accent-color: var(--amber-deep);
+    cursor:pointer;
+    flex:none;
+  }
+  .watch-row label{
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding: 26px 0 40px;
+    text-align:center;
+    transition: border-color 0.25s ease;
+  }
+  footer p{
+    font-size:11px;
+    color:var(--ink-dim);
+    opacity:0.8;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle, body, header, .module-card, .progress-fill{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">🍎</span> Rituel Vinaigre de Cidre</div>
+    <div class="header-right">
+      <div class="header-tag" id="header-progress-tag">5 modules</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème clair/sombre">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ink);"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="padding-bottom:0;">
+    <a class="back-link" href="index.html">← Retour à votre espace</a>
+    <div class="eyebrow">Espace client · Modules vidéo</div>
+    <h1>Vos 5 modules <em>vidéo</em></h1>
+    <p class="hero-sub">Suivez-les dans l'ordre et marquez chaque module comme terminé au fur et à mesure.</p>
+
+    <div class="progress-card">
+      <div class="progress-top">
+        <span class="progress-count" id="progress-count">0 sur 5 modules terminés</span>
+        <span class="progress-pct" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="modules">
+
+      <!-- MODULE 1 -->
+      <div class="module-card" data-module="0">
+        <div class="module-video-col">
+          <div class="video-placeholder">
+            <div class="video-placeholder-inner">
+              <span class="icon">🎬</span>
+              <span>Vidéo à venir</span>
+            </div>
+            <!-- Substitua este bloco .video-placeholder pelo código do player, ex:
+                 <vturb-smartplayer id="vid-XXXX" style="display:block;margin:0 auto;width:100%;max-width:220px;">
+                   <div class="vturb-player-placeholder" style="position:relative;width:100%;padding:133.33% 0 0;z-index:0;background-color:black;"></div>
+                 </vturb-smartplayer> -->
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="module-head">
+            <div class="module-num">01<span class="check-badge">✓</span></div>
+            <h3>Module 1 — [Titre à définir]</h3>
+          </div>
+          <p>[Description courte à définir]</p>
+          <div class="watch-row">
+            <input type="checkbox" class="watch-checkbox" id="watch-0">
+            <label for="watch-0">Marquer ce module comme terminé</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 2 -->
+      <div class="module-card" data-module="1">
+        <div class="module-video-col">
+          <div class="video-placeholder">
+            <div class="video-placeholder-inner">
+              <span class="icon">🎬</span>
+              <span>Vidéo à venir</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="module-head">
+            <div class="module-num">02<span class="check-badge">✓</span></div>
+            <h3>Module 2 — [Titre à définir]</h3>
+          </div>
+          <p>[Description courte à définir]</p>
+          <div class="watch-row">
+            <input type="checkbox" class="watch-checkbox" id="watch-1">
+            <label for="watch-1">Marquer ce module comme terminé</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 3 -->
+      <div class="module-card" data-module="2">
+        <div class="module-video-col">
+          <div class="video-placeholder">
+            <div class="video-placeholder-inner">
+              <span class="icon">🎬</span>
+              <span>Vidéo à venir</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="module-head">
+            <div class="module-num">03<span class="check-badge">✓</span></div>
+            <h3>Module 3 — [Titre à définir]</h3>
+          </div>
+          <p>[Description courte à définir]</p>
+          <div class="watch-row">
+            <input type="checkbox" class="watch-checkbox" id="watch-2">
+            <label for="watch-2">Marquer ce module comme terminé</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 4 -->
+      <div class="module-card" data-module="3">
+        <div class="module-video-col">
+          <div class="video-placeholder">
+            <div class="video-placeholder-inner">
+              <span class="icon">🎬</span>
+              <span>Vidéo à venir</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="module-head">
+            <div class="module-num">04<span class="check-badge">✓</span></div>
+            <h3>Module 4 — [Titre à définir]</h3>
+          </div>
+          <p>[Description courte à définir]</p>
+          <div class="watch-row">
+            <input type="checkbox" class="watch-checkbox" id="watch-3">
+            <label for="watch-3">Marquer ce module comme terminé</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 5 -->
+      <div class="module-card" data-module="4">
+        <div class="module-video-col">
+          <div class="video-placeholder">
+            <div class="video-placeholder-inner">
+              <span class="icon">🎬</span>
+              <span>Vidéo à venir</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-body">
+          <div class="module-head">
+            <div class="module-num">05<span class="check-badge">✓</span></div>
+            <h3>Module 5 — [Titre à définir]</h3>
+          </div>
+          <p>[Description courte à définir]</p>
+          <div class="watch-row">
+            <input type="checkbox" class="watch-checkbox" id="watch-4">
+            <label for="watch-4">Marquer ce module comme terminé</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Ce contenu est fourni à titre informatif et ne remplace pas un avis médical. Les résultats peuvent varier d'une personne à l'autre. En cas de doute, consultez un professionnel de santé.</p>
+  </div>
+</footer>
+
+<script>
+  var TOTAL_MODULES = 5;
+  var PROGRESS_KEY = 'rvc-modules-done';
+
+  function getModulesDone(){
+    try{
+      var a = JSON.parse(localStorage.getItem(PROGRESS_KEY));
+      if (Array.isArray(a) && a.length === TOTAL_MODULES) return a;
+    }catch(e){}
+    return [false, false, false, false, false];
+  }
+  function setModulesDone(arr){
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(arr));
+  }
+  function renderProgress(){
+    var done = getModulesDone();
+    var count = done.filter(Boolean).length;
+    var pct = Math.round((count / TOTAL_MODULES) * 100);
+    document.getElementById('progress-count').textContent = count + ' sur ' + TOTAL_MODULES + ' modules terminés';
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('header-progress-tag').textContent = count + '/' + TOTAL_MODULES + ' modules';
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var stored = localStorage.getItem('rvc-theme');
+    var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = stored || (systemPrefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    toggleBtn.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('rvc-theme', next);
+    });
+
+    var done = getModulesDone();
+    var checkboxes = document.querySelectorAll('.watch-checkbox');
+    checkboxes.forEach(function(cb, i){
+      cb.checked = !!done[i];
+      cb.closest('.module-card').classList.toggle('done', !!done[i]);
+      cb.addEventListener('change', function(){
+        var d = getModulesDone();
+        d[i] = cb.checked;
+        setModulesDone(d);
+        cb.closest('.module-card').classList.toggle('done', cb.checked);
+        renderProgress();
+      });
+    });
+    renderProgress();
+  });
+</script>
+
+</body>
+</html>
